@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База нарушителей | Опасные люди Minecraft</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #ff3333;
+            --text-color: #e0e0e0;
+            --text-muted: #888888;
+            --badge-grief: #ff9900;
+            --badge-cheat: #cc00ff;
+            --badge-crash: #ff3333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(180deg, #000 0%, var(--card-bg) 100%);
+            border-bottom: 3px solid var(--accent-color);
+            text-align: center;
+            padding: 40px 20px;
+        }
+        header h1 {
+            color: var(--accent-color);
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #0a0a0a;
+            padding: 10px;
+        }
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .search-bar {
+            margin-bottom: 30px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: white;
+            font-size: 1.1rem;
+        }
+        .search-bar input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+        .player-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        .player-card {
+            background-color: var(--card-bg);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .player-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background-color: var(--accent-color);
+        }
+        .avatar-area {
+            flex: 0 0 100px;
+            margin-right: 25px;
+            text-align: center;
+        }
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            background-color: #333;
+            border-radius: 8px;
+            display: inline-block;
+            border: 2px solid #555;
+            background-image: repeating-linear-gradient(45deg, #2b2b2b, #2b2b2b 10px, #3a3a3a 10px, #3a3a3a 20px);
+        }
+        .info-area {
+            flex: 1;
+        }
+        .player-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .player-name {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 15px 0 0;
+        }
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge.grief { background-color: var(--badge-grief); color: #000; }
+        .badge.cheat { background-color: var(--badge-cheat); color: #fff; }
+        .badge.crash { background-color: var(--badge-crash); color: #fff; }
+        
+        .meta-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            background-color: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        .meta-info span strong {
+            color: var(--text-muted);
+        }
+        .description {
+            color: #ccc;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        .proof-btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+            border: 1px solid #444;
+        }
+        .proof-btn:hover {
+            background-color: #444;
+            border-color: var(--accent-color);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            background-color: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>База Опасных Людей</h1>
+        <p>Список подтвержденных вредителей локальных сетей</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="players.html" class="active">База нарушителей</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Поиск по нику или IP-адресу Radmin...">
+        </div>
+
+        <div class="player-grid">
+
+            <!-- КАРТОЧКА ИГРОКА 1 -->
+            <div class="player-card">
+                <div class="avatar-area">
+                    <div class="avatar-placeholder"></div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">No Skin</div>
+                </div>
+                <div class="info-area">
+                    <div class="player-header">
+                        <h2 class="player-name">X_Griefer_X</h2>
+                        <span class="badge grief">Грифер-рецидивист</span>
+                    </div>
+                    <div class="meta-info">
+                        <span><strong>IP Radmin:</strong> 26.47.195.12</span>
+                        <span><strong>Уровень угрозы:</strong> Высокий</span>
+                        <span><strong>Дата добавления:</strong> 23.10.2026</span>
+                    </div>
+                    <p class="description">Заходит на сервера под видом обычного игрока. Просит ресурсы, втирается в доверие, после чего ночью взрывает спавн динамитом и заливает сундуки лавой. Полностью уничтожил 3 приватных сервера.</p>
+                    <a href="#" class="proof-btn" target="_blank">Смотреть доказательства (Скриншоты)</a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА ИГРОКА 2 -->
+            <div class="player-card">
+                <div class="avatar-area">
+                    <div class="avatar-placeholder"></div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">No Skin</div>
+                </div>
+                <div class="info-area">
+                    <div class="player-header">
+                        <h2 class="player-name">MinecraftLover3000</h2>
+                        <span class="badge cheat">Читер (Hard Cheat)</span>
+                    </div>
+                    <div class="meta-info">
+                        <span><strong>IP Radmin:</strong> 26.102.44.89</span>
+                        <span><strong>Уровень угрозы:</strong> Средний</span>
+                        <span><strong>Дата добавления:</strong> 18.10.2026</span>
+                    </div>
+                    <p class="description">Использует жесткие читы (KillAura, Fly, X-Ray, SpeedHack). Убивает игроков прямо на спавне, моментально выкапывает весь алмазный сектор шахты. Игнорирует предупреждения админов.</p>
+                    <a href="#" class="proof-btn" target="_blank">Смотреть доказательства (Видео на YouTube)</a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА ИГРОКА 3 -->
+            <div class="player-card">
+                <div class="avatar-area">
+                    <div class="avatar-placeholder"></div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">No Skin</div>
+                </div>
+                <div class="info-area">
+                    <div class="player-header">
+                        <h2 class="player-name">DDoS_Anonym</h2>
+                        <span class="badge crash">Крашер серверов</span>
+                    </div>
+                    <div class="meta-info">
+                        <span><strong>IP Radmin:</strong> 26.14.210.5</span>
+                        <span><strong>Уровень угрозы:</strong> Критический</span>
+                        <span><strong>Дата добавления:</strong> 11.10.2026</span>
+                    </div>
+                    <p class="description">Использует сторонний софт для отправки битых пакетов на сервер, вызывая его моментальное падение (Crash). Если ему не выдают права администратора, угрожает положить ПК хоста через Radmin-сеть.</p>
+                    <a href="#" class="proof-btn" target="_blank">Смотреть доказательства (Логи сервера)</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 RadminVPN Minecraft Anti-Grief Community. Сайт создан исключительно в ознакомительных целях.
+    </footer>
+
+    <!-- Скрипт простого поиска по списку -->
+    <script>
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    let filter = this.value.toLowerCase();
+    let cards = document.querySelectorAll('.player-card');
+    
+    cards.forEach(card => {
+        let text = card.textContent.toLowerCase();
+        
+        if (text.includes(filter)) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
