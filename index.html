@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Черный Список | Опасные люди Minecraft RadminVPN</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #ff3333;
+            --text-color: #e0e0e0;
+            --text-muted: #888888;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(180deg, #000 0%, var(--card-bg) 100%);
+            border-bottom: 3px solid var(--accent-color);
+            text-align: center;
+            padding: 40px 20px;
+        }
+        header h1 {
+            color: var(--accent-color);
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #0a0a0a;
+            padding: 10px;
+        }
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .alert-box {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .alert-box h2 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+        .feature-card h3 {
+            color: #fff;
+            margin-top: 0;
+        }
+        .form-section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+        }
+        .form-section h2 {
+            margin-top: 0;
+            color: #fff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-muted);
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #121212;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            background-color: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Опасные Игроки Minecraft</h1>
+        <p>Единая база гриферства, читерства и обмана в сетях RadminVPN</p>
+    </header>
+
+    <nav>
+        <a href="index.html" class="active">Главная</a>
+        <a href="players.html">База нарушителей</a>
+    </nav>
+
+    <div class="container">
+        <div class="alert-box">
+            <h2>Внимание, администраторы серверов!</h2>
+            <p>Игроки из этого списка используют уязвимости локальных сетей RadminVPN для обхода банов по IP, краша серверов, кражи приватных данных и массового гриферинга. Будьте бдительны при их добавлении в сеть!</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Защита серверов</h3>
+                <p>Проверяйте ники и IP-адреса перед тем, как дать доступ к вашей локальной сети Radmin.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Актуальная база</h3>
+                <p>Ежедневные обновления на основе скриншотов, логов серверов и видео-доказательств.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Честные репорты</h3>
+                <p>Каждая анкета проходит модерацию. Ошибочные баны исключены.</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Сообщить об опасном игроке</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="nickname">Никнейм нарушителя в Minecraft:</label>
+                    <input type="text" id="nickname" placeholder="Например: GriefMaster99" required>
+                </div>
+                <div class="form-group">
+                    <label for="radmin-ip">IP в RadminVPN (если известен):</label>
+                    <input type="text" id="radmin-ip" placeholder="Например: 26.158.4.210">
+                </div>
+                <div class="form-group">
+                    <label for="reason">В чем заключается опасность? (Гриферство, читы, краш сервера):</label>
+                    <textarea id="reason" rows="4" placeholder="Опишите детально, что сделал данный игрок..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="proof">Ссылка на доказательства (Imgur, YouTube, Я.Диск):</label>
+                    <input type="url" id="proof" placeholder="https://..." required>
+                </div>
+                <button type="submit">Отправить на проверку</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 timonikisites Сайт создан исключительно в ознакомительных целях.
+    </footer>
+
+</body>
+</html>
