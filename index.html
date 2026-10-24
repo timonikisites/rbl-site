@@ -179,25 +179,62 @@
 
         <div class="form-section">
             <h2>Сообщить об опасном игроке</h2>
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label for="nickname">Никнейм нарушителя в Minecraft:</label>
-                    <input type="text" id="nickname" placeholder="Например: GriefMaster99" required>
-                </div>
-                <div class="form-group">
-                    <label for="radmin-ip">IP в RadminVPN (если известен):</label>
-                    <input type="text" id="radmin-ip" placeholder="Например: 26.158.4.210">
-                </div>
-                <div class="form-group">
-                    <label for="reason">В чем заключается опасность? (Гриферство, читы, краш сервера):</label>
-                    <textarea id="reason" rows="4" placeholder="Опишите детально, что сделал данный игрок..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="proof">Ссылка на доказательства (Imgur, YouTube, Я.Диск):</label>
-                    <input type="url" id="proof" placeholder="https://..." required>
-                </div>
-                <button type="submit">Отправить на проверку</button>
-            </form>
+            <form id="tg-form">
+    <div class="form-group">
+        <label for="nickname">Никнейм нарушителя в Minecraft:</label>
+        <input type="text" id="nickname" placeholder="Например: GriefMaster99" required>
+    </div>
+    <div class="form-group">
+        <label for="radmin-ip">IP в RadminVPN (если известен):</label>
+        <input type="text" id="radmin-ip" placeholder="Например: 26.158.4.210">
+    </div>
+    <div class="form-group">
+        <label for="reason">В чем заключается опасность? (Гриферство, читы, краш сервера):</label>
+        <textarea id="reason" rows="4" placeholder="Опишите детально, что сделал данный игрок..." required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="proof">Ссылка на доказательства (Imgur, YouTube, Я.Диск):</label>
+        <input type="url" id="proof" placeholder="https://..." required>
+    </div>
+    <button type="submit">Отправить на проверку</button>
+</form>
+
+<!-- Скрипт отправки в Telegram -->
+<script>
+const TOKEN = "ТВОЙ_ТОКЕН_БОТА";
+const CHAT_ID = "ТВОЙ_CHAT_ID";
+const URI_API = `https://telegram.org{TOKEN}/sendMessage`;
+
+document.getElementById('tg-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let message = `<b>🚨 НОВАЯ ЖАЛОБА НА ИГРОКА</b>\n\n`;
+    message += `<b>Ник:</b> ${document.getElementById('nickname').value}\n`;
+    message += `<b>IP Radmin:</b> ${document.getElementById('radmin-ip').value || 'Не указан'}\n`;
+    message += `<b>Причина:</b> ${document.getElementById('reason').value}\n`;
+    message += `<b>Доказательства:</b> ${document.getElementById('proof').value}`;
+
+    fetch(URI_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            parse_mode: 'html',
+            text: message
+        })
+    })
+    .then(response => {
+        if(response.ok) {
+            alert('Жалоба успешно отправлена на модерацию!');
+            document.getElementById('tg-form').reset();
+        } else {
+            alert('Ошибка при отправке. Попробуйте позже.');
+        }
+    })
+    .catch(err => alert('Ошибка сети.'));
+});
+</script>
+
         </div>
     </div>
 
